@@ -1492,7 +1492,7 @@ if (this.isStormRetreatActive()) {
     this.hud.gameOverTitle.textContent = result === 'win' ? 'Sieg' : 'Niederlage';
     this.hud.gameOverText.textContent = result === 'win'
       ? 'Du hast gewonnen. Zur Levelübersicht zurückkehren oder das Level erneut spielen.'
-      : 'Du hast verloren. Zur Levelübersicht zurückkehren oder das Level erneut spielen.';
+      : 'Du hast verloren.';
     this.hud.gameOverScreen.classList.remove('is-hidden');
   }
 
