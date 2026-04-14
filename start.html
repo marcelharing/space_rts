@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space RTS - Levelauswahl</title>
+    <link rel="preload" href="./font/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin />
+    <style>
+      @font-face {
+        font-family: 'Pixelify Sans';
+        src: url('./font/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf') format('truetype');
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+      }
+
+      :root {
+        color-scheme: dark;
+        font-family: 'Pixelify Sans', system-ui, sans-serif;
+        background: #04070f;
+        color: #e5eefc;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+        background:
+          linear-gradient(180deg, rgba(2, 6, 17, 0.55) 0%, rgba(7, 18, 35, 0.72) 100%),
+          url('./pics/milky-way-cosmos-atmosphere-space-galaxy-nebula-913321-pxhere.com(1).jpg') center center / cover no-repeat fixed;
+      }
+
+      body {
+        overflow-x: hidden;
+      }
+
+      main {
+        width: min(1100px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 40px 0;
+      }
+
+      .hero {
+        margin-bottom: 28px;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: #8fb4ff;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(36px, 6vw, 64px);
+        line-height: 0.98;
+      }
+
+      .intro {
+        margin: 0;
+        max-width: 700px;
+        color: rgba(238, 244, 255, 0.72);
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 18px;
+      }
+
+      .progression {
+        width: 100%;
+        margin: 24px 0 0;
+        padding: 14px;
+        border: 1px solid rgba(143, 180, 255, 0.12);
+        background: rgba(9, 18, 36, 0.76);
+      }
+
+      .progression-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .progression h2 {
+        margin: 0;
+        font-size: 22px;
+      }
+
+      .diamond-bank {
+        color: rgba(238, 244, 255, 0.78);
+        font-size: 16px;
+      }
+
+      .diamond-bank strong {
+        color: #85f0ff;
+      }
+
+      .upgrade-shop {
+        display: grid;
+        gap: 10px;
+      }
+
+      .shop-row {
+        display: grid;
+        grid-template-columns: 110px 1fr 82px;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border: 1px solid rgba(143, 180, 255, 0.12);
+        background: rgba(11, 22, 42, 0.76);
+      }
+
+      .shop-name {
+        font-size: 16px;
+      }
+
+      .shop-levels {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      .shop-level {
+        height: 8px;
+        border: 1px solid rgba(143, 180, 255, 0.16);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .shop-level.is-filled {
+        background: linear-gradient(135deg, #6eb6ff 0%, #8c8cff 100%);
+      }
+
+      .shop-buy,
+      .reset-button,
+      .link {
+        border: 1px solid rgba(170, 198, 255, 0.18);
+        padding: 10px 12px;
+        background: linear-gradient(135deg, #6eb6ff 0%, #8c8cff 100%);
+        color: #04101f;
+        font: inherit;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .shop-buy:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      .reset-button {
+        margin-top: 14px;
+      }
+
+      .card {
+        padding: 22px;
+        border: 1px solid rgba(143, 180, 255, 0.12);
+        border-radius: 0;
+        background: rgba(9, 18, 36, 0.76);
+      }
+
+      .level-tag {
+        display: inline-block;
+        margin-bottom: 14px;
+        padding: 6px 10px;
+        border-radius: 0;
+        background: rgba(120, 184, 255, 0.12);
+        color: #9fd0ff;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .card h2 {
+        margin: 0 0 8px;
+        font-size: 28px;
+      }
+
+      .card p {
+        margin: 0 0 18px;
+        min-height: 72px;
+        color: rgba(238, 244, 255, 0.62);
+        line-height: 1.55;
+      }
+
+      .link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 160px;
+        padding: 12px 18px;
+        border-radius: 0;
+        background: linear-gradient(135deg, #6eb6ff 0%, #8c8cff 100%);
+        color: #04101f;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .link:hover {
+        filter: brightness(1.06);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Space RTS</p>
+        <h1>Kampf im Weltraum</h1>
+        <p class="intro">Wähle eine Mission und führe deine Flotte durch Gefechte zwischen Meteoren und Basen.</p>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <span class="level-tag">Level 1</span>
+          <h2>Außenposten</h2>
+          <p>Der klassische Einstieg mit Standardbasis, Ressourcen und direktem Gegnerkontakt.</p>
+          <a class="link" href="./level-1.html">Level 1 starten</a>
+        </article>
+
+        <article class="card">
+          <span class="level-tag">Level 2</span>
+          <h2>Sturmfront</h2>
+          <p>Große Meteore ziehen durchs Bild und fordern schnelle Reaktionen.</p>
+          <a class="link" href="./level-2.html">Level 2 öffnen</a>
+        </article>
+
+        <article class="card">
+          <span class="level-tag">Level 3</span>
+          <h2>Letzter Orbit</h2>
+          <p>Die KI verteidigt eine dreiteilige Basis, die vollständig fallen muss.</p>
+          <a class="link" href="./level-3.html">Level 3 öffnen</a>
+        </article>
+      </section>
+
+      <section class="progression" aria-labelledby="progression-title">
+        <div class="progression-head">
+          <div>
+            <p class="eyebrow">Fortschritt</p>
+            <h2 id="progression-title">Permanente Upgrades</h2>
+          </div>
+          <div class="diamond-bank">Diamanten <strong id="diamond-bank">0</strong></div>
+        </div>
+        <div class="upgrade-shop" id="upgrade-shop"></div>
+        <button class="reset-button" id="reset-progress">Ganz neu beginnen</button>
+      </section>
+    </main>
+    <script type="module">
+      import { preloadClickSound, playClickSound } from './src/ui-audio.js';
+      import { UPGRADE_DEFS, getUpgradeCost, loadProfile, purchaseUpgrade, resetProfile } from './src/progression.js';
+
+      const CLICK_DELAY_MS = 110;
+
+      preloadClickSound();
+
+      const diamondBank = document.querySelector('#diamond-bank');
+      const upgradeShop = document.querySelector('#upgrade-shop');
+      const resetButton = document.querySelector('#reset-progress');
+
+      function renderShop() {
+        const profile = loadProfile();
+        diamondBank.textContent = `${profile.diamonds}`;
+
+        upgradeShop.innerHTML = Object.entries(UPGRADE_DEFS).map(([key, def]) => {
+          const level = profile.upgrades[key];
+          const cost = level >= def.maxLevel ? 'MAX' : `${getUpgradeCost(key, level)} D`;
+          const levels = Array.from({ length: def.maxLevel }, (_, index) => `<span class="shop-level${index < level ? ' is-filled' : ''}"></span>`).join('');
+          return `
+            <div class="shop-row">
+              <div class="shop-name">${def.label}</div>
+              <div class="shop-levels">${levels}</div>
+              <button class="shop-buy" data-upgrade="${key}" ${level >= def.maxLevel || profile.diamonds < getUpgradeCost(key, level) ? 'disabled' : ''}>${cost}</button>
+            </div>
+          `;
+        }).join('');
+
+        for (const button of upgradeShop.querySelectorAll('.shop-buy')) {
+          button.addEventListener('click', async () => {
+            await playClickSound();
+            purchaseUpgrade(button.dataset.upgrade);
+            renderShop();
+          });
+        }
+      }
+
+      resetButton.addEventListener('click', async () => {
+        await playClickSound();
+        resetProfile();
+        renderShop();
+      });
+
+      renderShop();
+
+      for (const link of document.querySelectorAll('.link')) {
+        link.addEventListener('click', async (event) => {
+          event.preventDefault();
+          await playClickSound();
+          window.setTimeout(() => {
+            window.location.href = link.href;
+          }, CLICK_DELAY_MS);
+        });
+      }
+    </script>
+  </body>
+</html>
